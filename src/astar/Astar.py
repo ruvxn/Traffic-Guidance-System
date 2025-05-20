@@ -18,7 +18,8 @@ class ASTAR:
         while not OpenSet.empty():  # Opens a loop that will only end when the Prio queue (Openset) is empty
             
             Fscore, SumCost, Path = OpenSet.get()    #from the open set, it retrieves the Fscore and cost/weight + its path (for the first time looping it will be the origin node)
-            
+            visited_count += 1
+
             CurrentNode = Path[-1]   
             
             if CurrentNode == target: 
