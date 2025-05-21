@@ -5,11 +5,12 @@ from src.lookup import build_travel_time_lookup
 from src.astar.graph import Graph
 from src.astar.Astar import astar
 from src.astar.heuristics import haversine_heuristic
+from src.astar.yens_algo import k_shortest_paths
 
 # -------------------------- USER INPUTS ---------------------------
 # we have to use API endpoint to get the user inputs through the frontend
-origin_id = 4057
-destination_ids = [3180]
+origin_id = 4270
+destination_ids = [4034]
 
 selected_time = "2006-10-31 08:00"
 output_path = "generated_astar_input.txt" #overwritten every time the  script is run
@@ -56,12 +57,14 @@ with open(output_path, "w") as f:
     # Write nodes
     f.write("Nodes:\n")
     for node_id, (x, y) in node_coords.items():
-        f.write(f"{node_id}: ({x},{y})\n")
+        f.write(f"{int(node_id)}: ({x},{y})\n")
+
 
     # Write edges
     f.write("\nEdges:\n")
     for (a, b), cost in travel_time_lookup.items():
-        f.write(f"({a}, {b}): {round(cost, 2)}\n")
+        f.write(f"({int(a)}, {int(b)}): {round(cost, 2)}\n")
+
 
     # Write origin
     f.write("\nOrigin:\n")
@@ -81,21 +84,26 @@ graph.load_file(output_path)
 # this can be expanded to loop through multiple destinations later
 destination = list(graph.destination.keys())[0]
 
-# run Astar search
-path, cost = astar(graph, graph.origin, destination,heuristic=lambda n1, n2, g: haversine_heuristic(n1, n2, g))
+# run yens k shortest paths algorithm for the top 5 fastest routes
+#https://neo4j.com/docs/graph-data-science/current/algorithms/yens/
 
+paths = k_shortest_paths(graph, graph.origin, destination,
+                              heuristic=lambda n1, n2, g: haversine_heuristic(n1, n2, g),
+                              K=5)
 
 # -----------------  OUTPUT -----------------
 #this should be displayed on the frontend when implemeneted 
 #try to implement by next friday
-if path is None:
-    print("\n No path found between the selected SCATS sites.")
+
+
+
+if not paths:
+    print("\n No paths found between the selected SCATS sites.")
 else:
-    print("\n FASTEST PATH FOUND:")
-    print(" -> ".join(str(node) for node in path))
-
-    minutes = int(cost // 60)
-    seconds = int(cost % 60)
-    print(f"\n  Estimated Travel Time: {minutes} minutes {seconds} seconds ({round(cost, 2)} seconds)")
-
+    print("\n TOP 5 FASTEST ROUTES:")
+    for i, (path, cost) in enumerate(paths, 1):
+        minutes = int(cost // 60)
+        seconds = int(cost % 60)
+        print(f"\nRoute {i}: {' -> '.join(str(node) for node in path)}")
+        print(f"Estimated Travel Time: {minutes} min {seconds} sec ({round(cost, 2)} seconds)")
 

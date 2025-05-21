@@ -1,3 +1,9 @@
+
+# macOS system files
+.DS_Store
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -135,6 +141,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+TBRGSvenv/
+
 
 # Spyder project settings
 .spyderproject
