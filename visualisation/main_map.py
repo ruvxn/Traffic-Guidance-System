@@ -42,8 +42,8 @@ edges = [tuple(edge) for edge in raw_edges if edge[0] != edge[1]]
 # \------ this is just for testing ------
 
 selected_time = "2006-10-31 08:00"
-origin_id = 4270
-destination_id = 4034
+origin_id = 3002
+destination_id = 4324
 
 #--------------------------------------
 
@@ -199,7 +199,15 @@ for node_id in route_nodes:
             popup=f"SCATS {node_id}"
         ).add_to(m)
 
+# print 5 fastest routes
+#----------  this should be communicated with the frontend when API endpoints are fixed -----------
 
+print("\nTOP 5 FASTEST ROUTES:")
+for i, (path, cost) in enumerate(paths, 1):
+    minutes = int(cost // 60)
+    seconds = int(cost % 60)
+    print(f"\nRoute {i}: {' -> '.join(str(node) for node in path)}")
+    print(f"Estimated Travel Time: {minutes} min {seconds} sec ({round(cost, 2)} seconds)")
 
 
 m.save("visualisation/templates/map_with_routes.html")

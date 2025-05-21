@@ -9,8 +9,8 @@ from src.astar.yens_algo import k_shortest_paths
 
 # -------------------------- USER INPUTS ---------------------------
 # we have to use API endpoint to get the user inputs through the frontend
-origin_id = 4270
-destination_ids = [4034]
+origin_id = 3002
+destination_ids = [4324]
 
 selected_time = "2006-10-31 08:00"
 output_path = "generated_astar_input.txt" #overwritten every time the  script is run

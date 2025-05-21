@@ -21,7 +21,7 @@ def build_travel_time_lookup(edges, volume_dict, location_df):
         volume = volume_dict.get(site_b)
 
         if volume is None:
-            continue  # Skip if we don't have a prediction
+            continue  
 
         time = compute_travel_time(site_a, site_b, volume, location_df)
 

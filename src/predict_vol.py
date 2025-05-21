@@ -6,7 +6,7 @@ from datetime import datetime
 
 def load_sequence(df, sequence_length=8, target_time="2006-10-31 08:00"):
     """
-    For each SCATS site, extract the last `sequence_length` flow values before `target_time`
+    For each SCATS site, extract the last sequence_length flow values before target_time
     """
     target_dt = pd.to_datetime(target_time)
     df["Datetime"] = pd.to_datetime(df["Datetime"])
@@ -29,7 +29,7 @@ def load_sequence(df, sequence_length=8, target_time="2006-10-31 08:00"):
 
 def predict_volume(input_data, model, x_scaler, y_scaler):
     """
-    Takes a list of (site_id, last_8_flows) and returns site_id → predicted volume
+    Takes a list of (site_id, last_8_flows) and returns site_id -------> predicted volume
     """
     volume_dict = {}
 
@@ -48,9 +48,9 @@ def pred_vol_for_time(target_time, save_debug_version=False):
     """
     # load necessary data and models
     df = pd.read_csv("datasets/processed/df_15min.csv")
-    model = load_model("models/lstm_model_08step.h5", compile=False)
-    x_scaler = joblib.load("models/x_scaler_08step.pkl")
-    y_scaler = joblib.load("models/y_scaler_08step.pkl")
+    model = load_model("models/lstm_model.h5", compile=False) #use the best model
+    x_scaler = joblib.load("models/x_scaler_lstm.pkl")
+    y_scaler = joblib.load("models/y_scaler_lstm.pkl")
 
     # prep inputs and predict
     input_data = load_sequence(df, target_time=target_time)
