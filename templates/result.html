@@ -1,1 +1,24 @@
-<!--result.html-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Route Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Top 5 Routes</h2>
+  <ul>
+    {% for path, cost in routes %}
+      <li>
+        Route {{ loop.index }}: {{ ' → '.join(path | map('string')) }}  
+        — {{ (cost // 60)|int }} min {{ (cost % 60)|int }} sec
+      </li>
+    {% endfor %}
+  </ul>
+  
+  <iframe src="{{ url_for('static', filename='map_with_routes.html') }}" width="100%" height="600" style="border:none;"></iframe>
+  
+  
+  <a href="/">← Back</a>
+  
+</body>
+</html> 

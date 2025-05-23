@@ -1,1 +1,33 @@
-<!--index.html-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Route Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <form method="POST">
+        <label>Origin SCATS Site:</label>
+        <select name="origin" required>
+            {% for option in scats_options %}
+                <option value="{{ option.id }}">{{ option.name }}</option>
+            {% endfor %}
+        </select>
+    
+        <label>Destination SCATS Site:</label>
+        <select name="destination" required>
+            {% for option in scats_options %}
+                <option value="{{ option.id }}">{{ option.name }}</option>
+            {% endfor %}
+        </select>
+    
+        <label>Time (HH:MM):</label>
+        <input name="time" required placeholder="e.g., 08:00">
+    
+        <button type="submit">Generate Routes</button>
+    </form>
+
+</body>
+</html>
+
+
+
