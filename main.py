@@ -11,8 +11,8 @@ from src.astar.yens_algo import k_shortest_paths
 
 # -------------------------- USER INPUTS ---------------------------
 # we have to use API endpoint to get the user inputs through the frontend
-origin_id = 3002
-destination_ids = [4324]
+origin_id = 970
+destination_ids = [4821]
 selected_time = "2006-10-31 08:00"
 
 #==============================================================
@@ -66,6 +66,7 @@ for node_id in sorted(all_nodes):
         node_coords[node_id] = (0, 0)  # just in case if missing so that no errors come up
 
 print("Generating A* input file...") # debugging message
+
 # ---- create the input file for A* algorithm ----
 with open(output_path, "w") as f:
     # write nodes

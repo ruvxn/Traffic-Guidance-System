@@ -5,9 +5,7 @@ from tensorflow.keras.models import load_model
 from datetime import datetime
 
 def load_sequence(df, sequence_length=8, target_time="2006-10-31 08:00"):
-    """
-    For each SCATS site, extract the last sequence_length flow values before target_time
-    """
+    
     target_dt = pd.to_datetime(target_time)
     df["Datetime"] = pd.to_datetime(df["Datetime"])
 
@@ -28,9 +26,7 @@ def load_sequence(df, sequence_length=8, target_time="2006-10-31 08:00"):
 
 
 def predict_volume(input_data, model, x_scaler, y_scaler):
-    """
-    Takes a list of (site_id, last_8_flows) and returns site_id -------> predicted volume
-    """
+   
     volume_dict = {}
 
     for site_id, sequence in input_data:
@@ -43,12 +39,12 @@ def predict_volume(input_data, model, x_scaler, y_scaler):
 
 
 def pred_vol_for_time(target_time, save_debug_version=False):
-    """
-    Load model, scalers, and predict volume_dict for a given time.
-    """
+    
     # load necessary data and models
     df = pd.read_csv("datasets/processed/df_15min.csv")
     model = load_model("models/lstm_model.h5", compile=False) #use the best model
+    # the tcn layer is not identified so we cant use tcn eventhough it is slightly better than the LSTM.
+    #it wont affect the results much
     x_scaler = joblib.load("models/x_scaler_lstm.pkl")
     y_scaler = joblib.load("models/y_scaler_lstm.pkl")
 
