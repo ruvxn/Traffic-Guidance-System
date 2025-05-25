@@ -1,4 +1,3 @@
-# Traffic-Guidance-System
 
 # Traffic-Based Route Guidance System (TBRGS)
 
@@ -9,6 +8,22 @@ The Traffic-Based Route Guidance System (TBRGS) is an intelligent traffic predic
 - An interactive map showing all predicted routes, SCATS nodes, and estimated durations.
 
 The system is powered by Flask, TensorFlow, and Folium, and includes a user-friendly web interface with dropdown selection and visual feedback.
+
+---
+
+## Visualization with Interactive Map
+
+The system provides a comprehensive interactive map visualization that displays:
+
+- **Route Visualization**: Top 5 predicted fastest routes color-coded by travel time
+- **SCATS Network**: All traffic monitoring sites across Boorondora
+- **Real-time Predictions**: ML-powered traffic volume forecasts for each route segment
+- **Interactive Elements**: Clickable markers and route lines with detailed information
+- **Travel Time Estimates**: Dynamic calculations based on current traffic predictions
+
+![Traffic Route Visualization](visualisation.png)
+
+The interactive map is generated using Folium and provides users with an intuitive visual representation of their route options, making it easy to compare different paths and make informed travel decisions.
 
 ---
 
@@ -53,8 +68,8 @@ Then open your browser and go to:
 
 ## Features
 - SCATS input dropdown with nicknames for easy selection
-- ML-powered traffic volume predictions (LSTM, RNN, GRU)
-- A* and Yen’s algorithm integration
+- ML-powered traffic volume predictions (LSTM, RNN, GRU, TCN)
+- A* and Yen's algorithm integration
 - Interactive map via Folium
 - Top 5 predicted fastest paths shown with color-coded lines and travel time
 
@@ -73,6 +88,7 @@ Then open your browser and go to:
 ├── models/                # Trained ML models
 ├── src/                   # A* search and other helpers
 ├── requirements.txt
+├── visualisation.png      
 └── README.md
 ```
 
@@ -85,4 +101,3 @@ Then open your browser and go to:
 
 ---
 
-Thank you for using the Traffic-Based Route Guidance System!
