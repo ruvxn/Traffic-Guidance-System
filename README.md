@@ -1,3 +1,4 @@
+# Traffic-Guidance-System
 
 # Traffic-Based Route Guidance System (TBRGS)
 
@@ -16,7 +17,7 @@ The system is powered by Flask, TensorFlow, and Folium, and includes a user-frie
 The system provides a comprehensive interactive map visualization that displays:
 
 - **Route Visualization**: Top 5 predicted fastest routes color-coded by travel time
-- **SCATS Network**: All traffic monitoring sites across Boorondora
+- **SCATS Network**: All traffic monitoring sites across Melbourne
 - **Real-time Predictions**: ML-powered traffic volume forecasts for each route segment
 - **Interactive Elements**: Clickable markers and route lines with detailed information
 - **Travel Time Estimates**: Dynamic calculations based on current traffic predictions
@@ -68,7 +69,7 @@ Then open your browser and go to:
 
 ## Features
 - SCATS input dropdown with nicknames for easy selection
-- ML-powered traffic volume predictions (LSTM, RNN, GRU, TCN)
+- ML-powered traffic volume predictions (LSTM, RNN, GRU)
 - A* and Yen's algorithm integration
 - Interactive map via Folium
 - Top 5 predicted fastest paths shown with color-coded lines and travel time
@@ -77,19 +78,26 @@ Then open your browser and go to:
 
 ## File Structure
 ```
-├── app.py                 # Flask backend
-├── main.py                # Core route & map logic
+├── app.py                      # Flask backend
+├── main.py                     # Core route & map logic
+├── main_map.py                 # Map generation logic - Initial setup
+├── test.ipynb                  # Testing notebook
+├── generated_astar_input.txt   # Automatically generated A* algorithm input data
+├── output.png                  #  model performance screenshot
+├── visualisation.png           # Interactive map visualization screenshot
+├── Assignment2B final .pdf     # Final project report
 ├── templates/
-│   ├── index.html         # User input form
-│   ├── result.html        # Routes + embedded map
-├── static/
-│   └── map_with_routes.html
-├── datasets/processed/    # Cleaned SCATS & edge data
-├── models/                # Trained ML models
-├── src/                   # A* search and other helpers
-├── requirements.txt
-├── visualisation.png      
-└── README.md
+│   ├── index.html              # User input form
+│   └── result.html             # Routes + embedded map
+├── static/                     # Static web assets
+├── datasets/                   # Raw and processed SCATS data
+├── models/                     # Trained ML models (LSTM, RNN, GRU, TCN)
+├── src/                        # A* search and helper functions
+├── notebooks/                  # Jupyter notebooks for analysis
+├── visualisation/              # Visualization components
+├── TBRGSvenv/                  # Virtual environment
+├── requirements.txt            # Python dependencies
+└── README.md                   # This file
 ```
 
 ---
@@ -98,6 +106,7 @@ Then open your browser and go to:
 - The dataset and ML models must be preloaded before first run.
 - System uses historical data from 2006 for predictions.
 - Map and routes are dynamically generated per user request.
+- **Assignment2B final .pdf** contains the complete project documentation and analysis.
 
 ---
 
